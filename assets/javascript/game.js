@@ -5,15 +5,13 @@ let birds = ["hawk", "cardinal", "dove", "osprey", "bluejay", "finch", "bald eag
 let gameBird = birds[Math.floor(Math.random() * birds.length)]; //name of bird selected randomly from array
 let gameBirdArray = gameBird.split("");
 let guessesRem = (gameBird.length + gameBird.length * .75);  //set number of guesses as twice the length of bird name i.e. bird.length*2
-guessesRem = Math.round(guessesRem);
+guessesRem = Math.round(guessesRem);//
 let wrongGuesses = []; //array of wrong guesses for displaying
 let rightGuessesArray = [];  //array of correct guesses for display.  length & init elements set when gameBird set
 //let rightGuesses = "";  //array of correct guesses for display.  length set when gameBird set
 let wins = 0;  //number of wins for display
-let badGuesses = "";
-
-let hiddenWord = "";
-
+//let badGuesses = "";
+let hiddenWord = "";//
 
 //variables to hold references to html elements for display
 let directionsText = document.getElementById("directions");
@@ -44,7 +42,6 @@ let wordGuessGame = {
                 //    let arrIndex = gameBirdArray.indexOf(guess);
                 //    rightGuessesArray[arrIndex] = guess;
                 //    document.getElementById("currentWord").innerHTML = rightGuessesArray.join("");
-
                 //} else {
                 //    echoText.textContent = guess;
                 //    wrongGuesses.push(guess);
@@ -52,28 +49,27 @@ let wordGuessGame = {
                 //    guessesRem = guessesRem - 1;
                 //    document.getElementById("guessesRem").innerHTML = guessesRem;
                 //};
-
                 if (gameBird.includes(guess)) {
-                    for (let i = n = 0; i < gameBird.length; i++) {
-                        if (gameBird.charAt(n) == guess) {
-                            hiddenWord.charAt(n) = guess;
-                            document.getElementById("currentWord").innerHTML = hiddenWord;
-                        } else {
-                            n++;
-                        };
-
+                    for (let i = 0; i < gameBird.length; i++) {
+                        for (let n =0;n<gameBird.length;n++) {
+                            if (gameBird.charAt(n) === guess) {
+                                let newhiddenWord = hiddenWord.replace(" _ ", guess);
+                                document.getElementById("currentWord").innerHTML = newhiddenWord;    
+                            }
+                        // if (gameBird.charAt(n) === guess) {
+                        //     let newhiddenWord = hiddenWord.replace(" _ ", guess);
+                        //     document.getElementById("currentWord").innerHTML = newhiddenWord;
+                        //     n++;
+                        // } else {
+                        //     n++;
+                        // };
                     };
                 } else {
                     wrongGuesses.push(guess);
                     document.getElementById("guesses").innerHTML = wrongGuesses.join();
                     guessesRem = guessesRem - 1;
                     document.getElementById("guessesRem").innerHTML = guessesRem;
-
-
                 };
-
-
-
                 if (guessesRem === 0) {
                     alert("End of Game");
                     return;
