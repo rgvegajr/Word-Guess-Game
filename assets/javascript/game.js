@@ -26,7 +26,7 @@ let wordGuessGame = {
     init: function () {
         for (let i = 0; i < gameBird.length; i++) {
             hiddenWord = hiddenWord + " _ ";
-        };            
+        };
         document.getElementById("wins").innerHTML = wins;
         document.getElementById("currentBird").innerHTML = gameBird; //remove after testing
         document.getElementById("currentWord").innerHTML = hiddenWord;
@@ -51,20 +51,21 @@ let wordGuessGame = {
                 //};
                 if (gameBird.includes(guess)) {
                     for (let i = 0; i < gameBird.length; i++) {
-                        for (let n =0;n<gameBird.length;n++) {
+                        for (let n = 0; n < gameBird.length; n++) {
                             if (gameBird.charAt(n) === guess) {
                                 let newhiddenWord = hiddenWord.replace(" _ ", guess);
-                                document.getElementById("currentWord").innerHTML = newhiddenWord;    
+                                document.getElementById("currentWord").innerHTML = newhiddenWord;
                             }
-                        // if (gameBird.charAt(n) === guess) {
-                        //     let newhiddenWord = hiddenWord.replace(" _ ", guess);
-                        //     document.getElementById("currentWord").innerHTML = newhiddenWord;
-                        //     n++;
-                        // } else {
-                        //     n++;
-                        // };
+                            // if (gameBird.charAt(n) === guess) {
+                            //     let newhiddenWord = hiddenWord.replace(" _ ", guess);
+                            //     document.getElementById("currentWord").innerHTML = newhiddenWord;
+                            //     n++;
+                            // } else {
+                            //     n++;
+                            // };
+                        };
                     };
-                } else {
+                    } else {
                     wrongGuesses.push(guess);
                     document.getElementById("guesses").innerHTML = wrongGuesses.join();
                     guessesRem = guessesRem - 1;
@@ -75,6 +76,9 @@ let wordGuessGame = {
                     return;
                 }
             };
+        } else {
+            alert("Game Over");
+            return;
         }
     }
 }
