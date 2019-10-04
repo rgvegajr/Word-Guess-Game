@@ -13,6 +13,11 @@ let hiddenWordArray = [];//
 let gameIndex = 0;
 let alphaCheck = /[a-z]/;
 let echoText = document.getElementById("echo");  //displays letter guessed
+let birdAudio = document.getElementById("birdsAudio");
+function playAudio() {
+    birdAudio.play();
+}
+
 
 //objects
 let wordGuessGame = {
@@ -24,6 +29,8 @@ let wordGuessGame = {
         document.getElementById("currentBird").innerHTML = gameBird; //remove after testing
         document.getElementById("currentWord").innerHTML = hiddenWordArray.join("  ");
         document.getElementById("guessesRem").innerHTML = guessesRem;
+        document.getElementById("bird-image").src = "assets/images/bird.jpg";
+        //birdAudio.play();  //need to figure out why this doesn't play on load
     },
     play: function() {
         if (gameIndex === birds.length) {  //game ends when all elements of the game array have been presented
@@ -34,19 +41,21 @@ let wordGuessGame = {
             echoText.textContent = guess; //for testing only, remove once code verified
             if (!guess.match(alphaCheck)) { 
                 alert("Invalid input.  Please enter a letter.")
-            } else {           
-      
-while (guessesRem !== 0 && hiddenWordArray.includes("_")) {
-            if (gameBirdArray.includes(guess) && (guessesRem !== 0)) {
-                for (let n = 0; n < gameBirdArray.length; n++) {
-                    if (gameBirdArray[n] == guess) {
-                        hiddenWordArray[n] = guess;
-                        document.getElementById("currentWord").innerHTML = hiddenWordArray.join("  ");
-                    }                   
-                };
+            } else {        
+                 while (guessesRem !== 0 && hiddenWordArray.includes("_")) {
+                if (gameBirdArray.includes(guess) && (guessesRem !== 0)) {
+                    for (let n = 0; n < gameBirdArray.length; n++) {
+                        if (gameBirdArray[n] == guess) {
+                            hiddenWordArray[n] = guess;
+                            document.getElementById("currentWord").innerHTML = hiddenWordArray.join("  ");
+                        }                   
+                    };
                 if (!hiddenWordArray.includes("_")) {
                     wins = wins + 1;
                     document.getElementById("wins").innerHTML = wins;
+                    document.getElementById("bird-image").src = "assets/images/finch.jpg";
+                    //document.getElementById("birdsAudio").src = "assets/sounds/birds.mp3";  //insert code to select and play gameBird audio
+
                     return "won";
                 }
             } else {
