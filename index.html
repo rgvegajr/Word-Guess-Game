@@ -5,28 +5,28 @@
     <meta charset="utf-8" />
     <title>Word Guess Game</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 <body>
-    <h1 style="text-align:center;margin:30px">Word Guess Game:  Florida Birds</h1>
+    <h1><em>Word Guess Game:  Florida Birds</em></h1>
     <div class="container-fluid" style="margin:5% 20%;width:60%;border:solid 5px red">
 
         <div class="row">
             <div class="col-sm" style="margin:5px 10px;border:solid 2px grey">
-                <!--                   Image goes here, left side or top (for mobile)-->
-                <img src="assets/images/bird.jpg" />
+                <img id="bird-image" src="" />
+
             </div>
             <div class="col-sm" style="margin:5px 10px;border:solid 2px grey;text-align:center">
-                <h2 id="directions">Press any key to get started!</h2>
+                <h2 id="directions"><em>Press any key to get started!</em></h2>
                 <br />
                 <h2>Wins:  <span id="wins"></span></h2>
                 <br />
-                <!-- test code to show game bird -->
+                <!-- test code to display gameBird -->
                 <h2>Current Bird</h2>
                 <br />
                 <h2 id="currentBird" style="font-size:20px;font-weight:700;font-style:italic"></h2>
-
-                <!-- end of test code to show game bird -->
+                <!-- end of test code to show gameBird -->
                 <h2>Current Word</h2>
                 <br />
                 <h2 id="currentWord" style="font-size:20px;font-weight:700;font-style:italic"></h2>
@@ -43,7 +43,13 @@
         </div>
 
     </div>
-
+ >
+    <audio id="birdsAudio">
+    
+        <source src="assets/sounds/birds.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
     <script src="assets/javascript/game.js"></script>
 
     <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
