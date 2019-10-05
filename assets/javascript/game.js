@@ -14,14 +14,19 @@ let gameIndex = 0;
 let alphaCheck = /[a-z]/;
 let echoText = document.getElementById("echo");  //displays letter guessed
 let birdAudio = document.getElementById("birdsAudio");
-function playAudio() {
+function playAudio(gameBird) {
     birdAudio.play();
 }
+// function gameBirdAudio(gameBird){
+//     let currentBirdAudio = 
+
+// }
 
 
 //objects
 let wordGuessGame = {
-    init: function(wins) {
+    init: function() {
+
         for (let i = 0; i < gameBirdArray.length; i++) {
             hiddenWordArray[i] = "_";
         };
@@ -44,6 +49,7 @@ let wordGuessGame = {
             } else {        
                  while (guessesRem !== 0 && hiddenWordArray.includes("_")) {
                 if (gameBirdArray.includes(guess) && (guessesRem !== 0)) {
+                    document.getElementById("goodGuessAudio").play();
                     for (let n = 0; n < gameBirdArray.length; n++) {
                         if (gameBirdArray[n] == guess) {
                             hiddenWordArray[n] = guess;
@@ -53,7 +59,10 @@ let wordGuessGame = {
                 if (!hiddenWordArray.includes("_")) {
                     wins = wins + 1;
                     document.getElementById("wins").innerHTML = wins;
-                    document.getElementById("bird-image").src = "assets/images/finch.jpg";
+                    document.getElementById("game-bird-audio").src = "assets/sounds/" + gameBird + ".mp3";
+                    document.getElementById("game-bird-audio").play();
+                    document.getElementById("bird-image").src = "assets/images/"+ gameBird + ".jpg";
+
                     //document.getElementById("birdsAudio").src = "assets/sounds/birds.mp3";  //insert code to select and play gameBird audio
 
                     return "won";
@@ -61,6 +70,7 @@ let wordGuessGame = {
             } else {
                 if (!wrongGuesses.includes(guess)) {
                 wrongGuesses.push(guess);
+                document.getElementById("badGuessAudio").play();
                 document.getElementById("guesses").innerHTML = wrongGuesses.join(", ");
                 guessesRem = guessesRem - 1;
                 document.getElementById("guessesRem").innerHTML = guessesRem;
@@ -78,5 +88,8 @@ let wordGuessGame = {
 }
 
 //calls
-wordGuessGame.init(wins);
+$(function() {
+    $( "p" ).text( "The DOM is now loaded and can be manipulated." );
+  });
+wordGuessGame.init();
 wordGuessGame.play();

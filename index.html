@@ -6,15 +6,17 @@
     <title>Word Guess Game</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 </head>
 <body>
     <h1><em>Word Guess Game:  Florida Birds</em></h1>
-    <div class="container-fluid" style="margin:5% 20%;width:60%;border:solid 5px red">
+    <div class="container-fluid" style="margin:5% 20%;width:60%;border:solid 5px darkolivegreen">
 
         <div class="row">
             <div class="col-sm" style="margin:5px 10px;border:solid 2px grey">
                 <img id="bird-image" src="" />
+                <audio id="game-bird-audio" src=""></audio>
 
             </div>
             <div class="col-sm" style="margin:5px 10px;border:solid 2px grey;text-align:center">
@@ -45,8 +47,15 @@
     </div>
  >
     <audio id="birdsAudio">
-    
         <source src="assets/sounds/birds.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="goodGuessAudio">
+        <source src="assets/sounds/Cardinal-GoodGuess.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="badGuessAudio">
+        <source src="assets/sounds/Hawk-BadGuess.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     
