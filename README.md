@@ -6,3 +6,7 @@ Instructions:
 2.  Guess a letter (press a letter key) included in the name of the bird.  
 3.  If the name contains the letter, it will be displayed in the proper location.  If the name includes more than one of the letter types, all occurrences will be displayed in the appropriate place.  If the name does not contain the letter, the number of guesses will be decremented by one.
 4.  Repeat guessing letters until the bird is correctly guessed (you win) or you run out of guesses (you lose).
+
+Known Issues:
+1.  Selecting new game does not regenerate a new word (bird) to guess and keeps previously wrong guessed letters.  Need to reload page to get new word and reset the wrong guesses however doing so resets wins to zero.
+
