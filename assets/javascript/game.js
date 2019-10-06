@@ -7,7 +7,7 @@ let gameBirdArray = gameBird.split("");
 let guessesRem = (gameBird.length + gameBird.length * .75);  //set number of guesses as twice the length of bird name i.e. bird.length*2
 guessesRem = Math.round(guessesRem);//
 let wrongGuesses = []; //array of wrong guesses for displaying
-let rightGuessesArray = [];  //array of correct guesses for display.  length & init elements set when gameBird set
+// let rightGuessesArray = [];  //array of correct guesses for display.  length & init elements set when gameBird set
 let wins = 0;  //number of wins for display
 let hiddenWordArray = [];//
 let gameIndex = 0;
@@ -19,9 +19,7 @@ function playAudio(gameBird) {
 }
 // function gameBirdAudio(gameBird){
 //     let currentBirdAudio = 
-
 // }
-
 
 //objects
 let wordGuessGame = {
@@ -31,9 +29,9 @@ let wordGuessGame = {
             hiddenWordArray[i] = "_";
         };
         document.getElementById("wins").innerHTML = wins;
-        document.getElementById("currentBird").innerHTML = gameBird; //remove after testing
+        // document.getElementById("currentBird").innerHTML = gameBird; //remove after testing
         document.getElementById("currentWord").innerHTML = hiddenWordArray.join("  ");
-        document.getElementById("guessesRem").innerHTML = guessesRem;
+        document.getElementById("remGuesses").innerHTML = guessesRem;
         document.getElementById("bird-image").src = "assets/images/birds.jpg";
         //birdAudio.play();  //need to figure out why this doesn't play on load
     },
@@ -41,14 +39,15 @@ let wordGuessGame = {
         if (gameIndex === birds.length) {  //game ends when all elements of the game array have been presented
             return;
         };
+        wordGuessGame.init();
         document.onkeyup = function(event) {  //capture 
             let guess = event.key.toLowerCase();
-            echoText.textContent = guess; //for testing only, remove once code verified
-            if (!guess.match(alphaCheck)) { 
+            // echoText.textContent = guess; //for testing only, remove once code verified
+            if (!guess.match(alphaCheck) || (event.keyCode === 13)) { 
                 alert("Invalid input.  Please enter a letter.")
             } else {        
-                 while (guessesRem !== 0 && hiddenWordArray.includes("_")) {
-                if (gameBirdArray.includes(guess) && (guessesRem !== 0)) {
+                while (guessesRem !== 0 && hiddenWordArray.includes("_")) {
+                if (gameBirdArray.includes(guess) && (guessesRem !== 0)) {  //right guess code
                     document.getElementById("goodGuessAudio").play();
                     for (let n = 0; n < gameBirdArray.length; n++) {
                         if (gameBirdArray[n] == guess) {
@@ -62,20 +61,36 @@ let wordGuessGame = {
                     document.getElementById("game-bird-audio").src = "assets/sounds/" + gameBird + ".mp3";
                     document.getElementById("game-bird-audio").play();
                     document.getElementById("bird-image").src = "assets/images/"+ gameBird + ".jpg";
-
-                    //document.getElementById("birdsAudio").src = "assets/sounds/birds.mp3";  //insert code to select and play gameBird audio
-
-                    return "won";
+                    setTimeout(function(){ 
+                        let ans = confirm("You Win!! Click OK to play again or Cancel to end game.");
+                        if (ans) {
+                            wordGuessGame.play();
+                        } else {
+                            alert("Game Over");
+                            return;
+                        };
+                    }, 300);
+                    // return "won";
                 }
-            } else {
-                if (!wrongGuesses.includes(guess)) {
-                wrongGuesses.push(guess);
-                document.getElementById("badGuessAudio").play();
-                document.getElementById("guesses").innerHTML = wrongGuesses.join(", ");
+            } else {  //wrong guess code
                 guessesRem = guessesRem - 1;
-                document.getElementById("guessesRem").innerHTML = guessesRem;
-                }
+                document.getElementById("badGuessAudio").play();
+                document.getElementById("remGuesses").innerHTML = guessesRem;
+                if (!wrongGuesses.includes(guess)) {
+                    wrongGuesses.push(guess);
+                    document.getElementById("guesses").innerHTML = wrongGuesses.join(", ");
+                };
                 if (guessesRem === 0) {
+                    setTimeout(function(){ 
+                        let ans = confirm("You lost. Click OK to play again or Cancel to end game.");
+                        if (ans) {
+                            wordGuessGame.play();
+                        } else {
+                            alert("Game Over");
+                            return;
+                        };
+                    }, 300);
+
                     return "lost";
                 }
             };
@@ -88,8 +103,5 @@ let wordGuessGame = {
 }
 
 //calls
-$(function() {
-    $( "p" ).text( "The DOM is now loaded and can be manipulated." );
-  });
 wordGuessGame.init();
 wordGuessGame.play();
