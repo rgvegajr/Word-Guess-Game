@@ -10,3 +10,5 @@ Instructions:
 Known Issues:
 1.  Selecting new game does not regenerate a new word (bird) to guess and keeps previously wrong guessed letters.  Need to reload page to get new word and reset the wrong guesses however doing so resets wins to zero.
 
+Link:
+https://rgvegajr.github.io/Word-Guess-Game/
